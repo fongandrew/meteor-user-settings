@@ -30,9 +30,11 @@
    <form class="change-email setting">
    <div class="main">
       <span class="title">{{#if email}}Change{{else}}Set{{/if}} Email</span>
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" value="{{email}}"
-             class="{{#if error}}error{{/if}}" />
+      <div class="input-field">
+        <label class="{{#if email}}active{{/if}}" for="email">Email</label>
+        <input type="text" name="email" id="email" value="{{email}}"
+               class="{{#if error}}error{{/if}}" />
+      </div>
     </div>
 
     <div class="actions">
@@ -75,14 +77,15 @@
   <form class="setting change-password">
     <div class="main">
       <span class="title">Change Password</span>
-      <div class="{{#if _in error 'wrong-password' 'old-blank'}}error{{/if}}">
-        <label for="password">Old</label>
+      <div class="input-field
+                  {{#if _in error 'wrong-password' 'old-blank'}}error{{/if}}">
+        <label for="password">Old Password</label>
         <input type="password" id="password" name="password"
           class="{{#if _in error 'wrong-password' 'old-blank'}}error{{/if}}" />
       </div>
 
-      <div class="{{#if _in error 'new-blank'}}error{{/if}}">
-        <label for="newPassword">New</label>
+      <div class="input-field {{#if _in error 'new-blank'}}error{{/if}}">
+        <label for="newPassword">New Password</label>
         <input type="password" id="newPassword" name="newPassword" 
                class="{{#if _in error 'new-blank'}}error{{/if}}" />
       </div>
