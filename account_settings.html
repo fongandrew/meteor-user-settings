@@ -1,0 +1,116 @@
+<template name="accountSettings">{{#with addContext}}
+  <div id="account-settings-page">
+    {{> _changeEmail}}
+    <div class="divider"></div>
+   
+    {{#if email}}
+      {{#unless verified}}
+        {{> _verifyEmail}}
+        <div class="divider"></div>
+      {{/unless}}
+
+      {{> _changePassword}}
+      <div class="divider"></div>
+
+      {{> _resetPassword}}
+    {{/if}}
+  </div>
+{{/with}}</template>
+
+<template name="_errorMsg">
+  <span class="error">
+    <i class="fa fa-warning"></i>
+    {{#if errorText}}{{errorText}}{{else}}Unknown Error{{/if}}
+  </span>
+</template>
+
+<template name="_successMsg">
+  <span class="success">
+    <i class="fa fa-check"></i>
+    {{#if successText}}{{successText}}{{else}}Saved{{/if}}
+  </span>
+</template>
+
+<template name="_changeEmail">{{#with addContext}}
+   <form class="change-email section">
+    <h3>{{#if email}}Change{{else}}Set{{/if}} Email</h3>
+    <!-- <label for="email">Email</label> -->
+    <input type="text" name="email" id="email" value="{{email}}"
+           class="{{#if error}}error{{/if}}" />
+
+    {{#if error}}<span class="error">
+      <i class="fa fa-warning"></i> 
+      {{#if _eq error "invalid"}}Invalid address{{/if}}
+      {{#if _eq error "duplicate"}}Used by another account{{/if}}
+      {{#if _eq error "blank"}}Cannot be blank{{/if}}
+      {{#if _eq error "unknown"}}Unknown Error{{/if}}
+    </span>{{/if}}
+
+    {{#if saved}}{{> _successMsg}}{{/if}}
+
+    {{> saveButton}}
+  </form>
+{{/with}}</template>
+
+
+<template name="_verifyEmail">{{#with addContext}}
+  <form class="section js-verify-email">
+    <h3>Verify E-mail Address</h3>
+    <p>We've sent an e-mail to {{email}} to verify this address. Please
+    click this button to verify your address. If you did not previously
+    have an e-mail address set, you will also be prompted to set your
+    password.</p>
+    {{#if error}}{{> _errorMsg}}{{/if}}
+    {{#if saved}}{{> _successMsg successText="Sent"}}{{/if}}
+    {{> saveButton buttonText="Resend?"}}
+  </form>
+{{/with}}</template>
+
+
+<template name="_changePassword">{{#with addContext}}
+  <form class="section change-password">
+    <h3>Change Password</h3>
+    <div class="{{#if _in error 'wrong-password' 'old-blank'}}error{{/if}}">
+      <label for="password">Old</label>
+      <input type="password" id="password" name="password"
+        class="{{#if _in error 'wrong-password' 'old-blank'}}error{{/if}}" />
+    </div>
+
+    <div class="{{#if _in error 'new-blank'}}error{{/if}}">
+      <label for="newPassword">New</label>
+      <input type="password" id="newPassword" name="newPassword" 
+             class="{{#if _in error 'new-blank'}}error{{/if}}" />
+    </div>
+
+    {{#if _in error 'wrong-password' 'old-blank'}}<span class="error pw-error">
+      <i class="fa fa-warning"></i> 
+      {{#if _eq error "wrong-password"}}Wrong password{{/if}}
+      {{#if _eq error "old-blank"}}Cannot be blank{{/if}}
+    </span>{{/if}}
+
+    {{#if _eq error "new-blank"}}
+      <span class="error new-pw-error">
+        <i class="fa fa-warning"></i>
+        Cannot be blank
+      </span>
+    {{/if}}
+
+    {{#if _eq error "unknown"}}
+      {{> _errorMsg}}
+    {{/if}}
+
+    {{#if saved}}{{> _successMsg}}{{/if}}
+    {{> saveButton}}
+  </form>
+{{/with}}</template>
+
+
+<template name="_resetPassword">{{#with addContext}}
+  <form class="section reset-password">
+    <h3>Forgot Password?</h3>
+    <p>We can e-mail you a link to reset your password.</p>
+    {{#if error}}{{> _errorMsg}}{{/if}}
+    {{#if saved}}{{> _successMsg successText="Sent"}}{{/if}}
+    {{> saveButton}}
+  </form>
+{{/with}}</template>
