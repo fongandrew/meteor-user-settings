@@ -11,11 +11,18 @@ Package.onUse(function(api) {
   api.use('fongandrew:save-button');
   api.use('fongandrew:instance-vars');
   api.use('fongandrew:re-common');
+  api.use('accounts-password');
   api.use('templating', 'client');
   api.use('underscore');
   api.export('LoginComponents');
   api.addFiles([
+    '_config.js'
+  ], ['client', 'server']);
+  api.addFiles([
     'account_settings.html',
     'account_settings.js'
   ], 'client');
+  api.addFiles([
+    'account_server.js'
+  ], 'server');
 });

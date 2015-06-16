@@ -62,7 +62,7 @@
       }
 
       template.setVar('saving', true);
-      Meteor.call('accounts/changeEmail', email, function(err) {
+      Meteor.call('fongandrew:user-settings/changeEmail', email, function(err) {
         template.setVar('saving', false);
         if (err) {
           if (err.reason === 'duplicate-email') {
@@ -89,7 +89,7 @@
       e.preventDefault();
       template.resetVars();
       template.setVar('saving', true);
-      Meteor.call('accounts/resendVerify', function(err) {
+      Meteor.call('fongandrew:user-settings/resendVerify', function(err) {
         template.setVar('saving', false);
         if (err) {
           template.setVar('error', 'unknown');
