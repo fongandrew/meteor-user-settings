@@ -14,7 +14,6 @@ Package.onUse(function(api) {
   api.use('accounts-password');
   api.use('templating', 'client');
   api.use('underscore');
-  api.export('LoginComponents');
   api.addFiles([
     '_config.js'
   ], ['client', 'server']);
