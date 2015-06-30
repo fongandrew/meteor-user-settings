@@ -9,8 +9,9 @@
           "You must be logged in to perform this action");
       }
 
+      Accounts.sendVerificationEmail(this.userId);
       return {
-        sent: Accounts.sendVerificationEmail(Meteor.userId())
+        sent: 1
       };
     },
 
