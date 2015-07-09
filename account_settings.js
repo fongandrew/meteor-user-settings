@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  var emailRegex = new RegExp(
+    "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+" + 
+    "@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?" + 
+    "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+
   Template.accountSettings.helpers({
     addContext: function() {
       var user = Meteor.user();
@@ -56,7 +61,7 @@
         return;
       }
 
-      if (! RE.email.test(email)) {
+      if (! emailRegex.test(email)) {
         template.setVar('error', 'invalid');
         return;
       }

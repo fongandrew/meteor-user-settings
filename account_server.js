@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  var emailRegex = new RegExp(
+    "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+" + 
+    "@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?" + 
+    "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+
   // Meteor methods for simple account management stuff
   Meteor.methods({
     'fongandrew:user-settings/resendVerify': function() {
@@ -22,7 +27,7 @@
       }
 
       check(address, String);
-      if (! RE.email.test(address)) {
+      if (! emailRegex.test(address)) {
         throw new Meteor.Error(400, "invalid-email");
       }
 

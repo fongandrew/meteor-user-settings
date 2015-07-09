@@ -1,16 +1,16 @@
 Package.describe({
   name: 'fongandrew:user-settings',
   version: '0.1.0',
-  summary: 'Views for basic account setting stuff'
+  summary: 'Templates for basic account setting stuff',
+  git: 'https://github.com/fongandrew/meteor-user-settings.git'
 });
 
 Package.onUse(function(api) {
   'use strict';
   api.versionsFrom('METEOR@1.1.0.2');
-  api.use('fongandrew:spacebars-helpers');
-  api.use('fongandrew:save-button');
-  api.use('fongandrew:instance-vars');
-  api.use('fongandrew:re-common');
+  api.use('fongandrew:spacebars-helpers@0.1.0');
+  api.use('fongandrew:save-button@0.1.0');
+  api.use('fongandrew:instance-vars@0.2.0');
   api.use('accounts-password');
   api.use('templating', 'client');
   api.use('underscore');
